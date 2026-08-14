@@ -118,10 +118,10 @@ class DetectedEntity:
 
 def _build_analyzer() -> AnalyzerEngine:
     """Construct and configure the Presidio AnalyzerEngine."""
-    # Use spaCy en_core_web_lg as the NLP backend
+    # Use spaCy en_core_web_sm as the NLP backend
     provider = NlpEngineProvider(nlp_configuration={
         "nlp_engine_name": "spacy",
-        "models": [{"lang_code": "en", "model_name": "en_core_web_lg"}],
+        "models": [{"lang_code": "en", "model_name": "en_core_web_sm"}],
     })
     nlp_engine = provider.create_engine()
 
