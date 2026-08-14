@@ -54,7 +54,14 @@ def _cleanup_temp_dir(temp_dir: str) -> None:
 @app.get("/health", summary="Health Check")
 async def health_check() -> dict:
     """Service liveness/readiness probe."""
-    return {"status": "ok", "service": "pii-redactor"}
+    return {
+        "status": "OK",
+        "message": "PII Redaction API Server is running.",
+        "endpoints": {
+            "health": "/health",
+            "redact": "/redact (POST)",
+        },
+    }
 
 
 @app.get("/", response_class=HTMLResponse, summary="Web Interface")

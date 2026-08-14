@@ -43,12 +43,14 @@ class TestAppEndpoints:
         assert "dropzone" in response.text
 
     def test_get_health(self, client):
-        """GET /health returns JSON status ok."""
+        """GET /health returns JSON status OK and endpoints."""
         response = client.get("/health")
         assert response.status_code == 200
         data = response.json()
-        assert data.get("status") == "ok"
-        assert data.get("service") == "pii-redactor"
+        assert data.get("status") == "OK"
+        assert "PII Redaction API Server is running" in data.get("message", "")
+        assert "health" in data.get("endpoints", {})
+        assert "redact" in data.get("endpoints", {})
 
     def test_redact_rejects_non_docx(self, client):
         """POST /redact rejects non-docx file uploads."""
